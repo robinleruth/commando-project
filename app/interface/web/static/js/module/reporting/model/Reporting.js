@@ -17,8 +17,8 @@
      },
      defaults: function(){
          return {
-             start_date: "2006-02-02",
-             end_date: "2006-02-03",
+             start_date: "2020-03-02",
+             end_date: "2020-03-03",
              stock: "AAPL",
              strategy: "RANDOM_SIGNAL",
              ptf_type: "SHORT_ALLOWED",
@@ -54,7 +54,13 @@
                     // model.toVisual();
                 },
                 error: function(xhr, status, errorThrown){
-                    app.AlertView.show('Reporting', status + ' : ' + errorThrown, 'danger');
+                    try{
+                        app.AlertView.show('Reporting', status + ' : ' + xhr.responseJSON['detail'], 'danger');
+                    }
+                    catch(e){
+                        app.AlertView.show('Reporting', status + ' : ' + errorThrown, 'danger');
+                    }
+                    console.log(xhr);
                 }
             });
         })(this);

@@ -5,7 +5,7 @@ from dataclasses import field
 from datetime import date
 
 from app.domain.services.data.data_connector import DataConnector
-from app.domain.services.data.NoDataFoundException import NoDataFoundException
+from app.domain.services.data.no_data_found_exception import NoDataFoundException
 from app.infrastructure.data.data_connector_factory import data_connector_factory
 from app.infrastructure.log import logger
 from app.infrastructure.config import app_config

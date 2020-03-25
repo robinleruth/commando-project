@@ -11,7 +11,7 @@ from app.domain.services.portfolio.portfolio_service import PortfolioService
 from app.domain.services.strategy.random_strategy import RandomStrategy
 from app.domain.services.strategy.strategy_service_factory import strategy_service_factory
 from app.domain.services.data.data_service import DataService
-from app.domain.services.data.NoDataFoundException import NoDataFoundException
+from app.domain.services.data.no_data_found_exception import NoDataFoundException
 from app.domain.services.main_service import MainService
 from app.infrastructure.config import app_config
 from app.infrastructure.data.data_connector_factory import data_connector_factory
@@ -50,5 +50,8 @@ async def backtest_strategy(params: StrategySchemaIn):
         ret = service.serialize
         ret['base_100_file_name'] = file_name
     except NoDataFoundException as e:
-        raise HTTPException(400, e)
+        raise HTTPException(400, str(e))
+    except Exception as e:
+        raise HTTPException(400, str(e))
+    print(ret)
     return ret

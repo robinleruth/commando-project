@@ -1,4 +1,5 @@
 import json
+import math
 import numpy as np
 import pandas as pd
 
@@ -48,10 +49,10 @@ class MainService:
     def serialize(self):
         return {
             'positions': self.portfolio_service.serialize['portfolio'],
-            'value_at_risk': self.reporting_service.value_at_risk,
-            'max_drawdown': self.reporting_service.max_draw_down,
-            'volatility': self.reporting_service.vol_annu,
-            'sharpe_ratio': self.reporting_service.sharpe_ratio
+            'value_at_risk': self.reporting_service.value_at_risk if not math.isnan(self.reporting_service.value_at_risk) else 0,
+            'max_drawdown': self.reporting_service.max_draw_down if not math.isnan(self.reporting_service.max_draw_down) else 0,
+            'volatility': self.reporting_service.vol_annu if not math.isnan(self.reporting_service.vol_annu) else 0,
+            'sharpe_ratio': self.reporting_service.sharpe_ratio if not math.isnan(self.reporting_service.sharpe_ratio) else 0
         }
 
     def get_final_portfolio_dataframe(self) -> pd.DataFrame:
