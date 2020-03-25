@@ -13,6 +13,7 @@ from app.domain.services.strategy.strategy_service_factory import strategy_servi
 from app.domain.services.data.data_service import DataService
 from app.domain.services.main_service import MainService
 from app.infrastructure.config import app_config
+from app.infrastructure.data.data_connector_factory import data_connector_factory
 
 
 router = APIRouter()
@@ -20,13 +21,16 @@ router = APIRouter()
 
 @router.post('/', response_model=StrategySchemaOut)
 async def backtest_strategy(params: StrategySchemaIn):
+    start_date = params.start_date
+    end_date = params.end_date
     transaction_fee = params.transaction_fee
     initial_capital = params.initial_capital
     take_profit = params.take_profit if params.take_profit != 0 else None
     stop_loss = params.stop_loss if params.stop_loss != 0 else None
     strategy = params.strategy
     ptf_type = params.ptf_type
-    data_service = DataService()
+    data_connector = data_connector_factory()
+    data_service = DataService(data_connector, start_date, end_date)
     strategy_service = strategy_service_factory(strategy)
     portfolio_service = PortfolioService(transaction_fee,
                                          strategy_service,

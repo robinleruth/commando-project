@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 from typing import Union
+from datetime import date
 
 from app.interface.api.schemas.position_schema import PositionSchema
 from app.interface.api.schemas.portfolio_schema import PortfolioSchema
@@ -13,6 +14,8 @@ class StrategySchema(BaseModel):
 
 
 class StrategySchemaIn(StrategySchema):
+    start_date: date
+    end_date: date
     stock: str
     strategy: AvailableStrategy
     ptf_type: PortfolioType

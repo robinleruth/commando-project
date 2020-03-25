@@ -17,6 +17,8 @@
      },
      defaults: function(){
          return {
+             start_date: "2006-02-02",
+             end_date: "2006-02-03",
              stock: "AAPL",
              strategy: "RANDOM_SIGNAL",
              ptf_type: "SHORT_ALLOWED",
