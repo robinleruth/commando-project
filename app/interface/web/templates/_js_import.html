@@ -1,0 +1,56 @@
+<script type="text/template" id="reporting_template">
+    <div class="d-flex justify-content-around">
+        <div class="d-flex flex-column justify-content-around">
+            <div class="b100_image">
+            </div>
+            <div>
+                grid
+            </div>
+        </div>
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-column p-2 m-2">
+                <h2 style="text-align: center;">input</h2>
+                <hr/>
+                <div class="d-flex justify-content-between"><label>start date</label>:<input/></div>
+                <div class="d-flex justify-content-between"><label>end date</label>:<input/></div>
+                <div class="d-flex justify-content-between"><label>stock</label>:<input class="stock" value="<%= stock %>"/></div>
+                <div class="d-flex justify-content-between"><label>strategy</label>:<select class="strategy"></select></div>
+                <div class="d-flex justify-content-between"><label>ptf_type</label>:<select class="ptf_type"></select></div>
+                <div class="d-flex justify-content-between"><label>params</label>:<input class="params" value="<%= params %>"/></div>
+                <div class="d-flex justify-content-between"><label>transaction_fee</label>:<input class="transaction_fee" value="<%= transaction_fee %>"/></div>
+                <div class="d-flex justify-content-between"><label>initial_capital</label>:<input class="initial_capital" value="<%= initial_capital %>"/></div>
+                <div class="d-flex justify-content-between"><label>take_profit</label>:<input class="take_profit" value="<%= take_profit %>"/></div>
+                <div class="d-flex justify-content-between"><label>stop_loss</label>:<input class="stop_loss" value="<%= stop_loss %>"/></div>
+            </div>
+            <button class="launch">Go!</button>
+            <div class="d-flex flex-column p-2 m-2">
+                <h2 style="text-align: center;">output</h2>
+                <hr/>
+                <div class="d-flex justify-content-between"><label>value_at_risk </label> : <span><%= value_at_risk %></span></div>
+                <div class="d-flex justify-content-between"><label>max_drawdown </label> : <span><%= max_drawdown %></span></div>
+                <div class="d-flex justify-content-between"><label>volatility </label> : <span><%= volatility %></span></div>
+                <div class="d-flex justify-content-between"><label>sharpe_ratio </label> : <span><%= sharpe_ratio %></span></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="{{ url_for('static', filename='js/lib/underscore-min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/lib/backbone-min.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/module/Config.js')}}"></script>
+<script src="{{ url_for('static', filename='js/module/AlertView.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/module/trade/model/Trade.js')}}"></script>
+<script src="{{ url_for('static', filename='js/module/trade/model/ColTrade.js')}}"></script>
+
+
+<script src="{{ url_for('static', filename='js/module/position/model/Position.js')}}"></script>
+<script src="{{ url_for('static', filename='js/module/position/model/ColPosition.js')}}"></script>
+
+
+<script src="{{ url_for('static', filename='js/module/reporting/model/Reporting.js')}}"></script>
+<script src="{{ url_for('static', filename='js/module/reporting/view/ReportingView.js')}}"></script>
+
+
+<script src="{{ url_for('static', filename='js/module/app.js')}}"></script>
