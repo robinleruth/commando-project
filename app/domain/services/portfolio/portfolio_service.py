@@ -82,8 +82,9 @@ class PortfolioService:
         ''' TODO: If data more than daily, take only the close or return all info (OPEN/ CLOSE/ ETC) '''
         if self.df is None:
             self.df = pd.DataFrame(list(zip([i.as_of_date for i in self.portfolio],
-                                            [i.liquidative_value for i in self.portfolio])),
-                                   columns=[app_config.AS_OF_DATE, app_config.SPOT])
+                                            [i.liquidative_value for i in self.portfolio],
+                                            [i.asset_value for i in self.portfolio])),
+                                   columns=[app_config.AS_OF_DATE, app_config.SPOT, 'asset_value'])
         return self.df
 
     @property
