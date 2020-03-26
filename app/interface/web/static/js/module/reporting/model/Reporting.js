@@ -17,8 +17,8 @@
      },
      defaults: function(){
          return {
-             start_date: "2020-03-02",
-             end_date: "2020-03-03",
+             start_date: "2000-01-03",
+             end_date: "2019-04-12",
              stock: "AAPL",
              strategy: "RANDOM_SIGNAL",
              ptf_type: "SHORT_ALLOWED",

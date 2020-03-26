@@ -46,6 +46,7 @@
      populateSelects: function(){
          this.populateSelect('strategy', 'get_available_strategies');
          this.populateSelect('ptf_type', 'get_ptf_type');
+         this.populateSelect('stock', 'get_available_stock');
      },
      populateSelect: function(item, url){
          let dropdown = this.$('.' + item);

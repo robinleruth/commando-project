@@ -26,14 +26,15 @@ async def backtest_strategy(params: StrategySchemaIn):
     end_date = params.end_date
     transaction_fee = params.transaction_fee
     initial_capital = params.initial_capital
+    stock = params.stock
     take_profit = params.take_profit if params.take_profit != 0 else None
     stop_loss = params.stop_loss if params.stop_loss != 0 else None
     strategy = params.strategy
     ptf_type = params.ptf_type
     try:
-        data_connector = data_connector_factory()
+        data_connector = data_connector_factory(stock)
         data_service = DataService(data_connector, start_date, end_date)
-        strategy_service = strategy_service_factory(strategy)
+        strategy_service = strategy_service_factory(strategy, data_service)
         portfolio_service = PortfolioService(transaction_fee,
                                             strategy_service,
                                             asset_values=data_service.df,

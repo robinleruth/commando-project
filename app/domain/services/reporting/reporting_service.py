@@ -86,7 +86,7 @@ class ReportingService:
     def generate_graph(self) -> Figure:
         if self.base_100 is None:
             self.compute_base_100()
-        gridsize = (5, 2)
+        gridsize = (7, 2)
         fig = plt.figure(figsize=(12, 8))
         ax1 = plt.subplot2grid(gridsize, (0,0),
                                colspan=2,
@@ -101,7 +101,7 @@ class ReportingService:
         df: pd.DataFrame = self.ptf_service.ptf_to_df()
         ax2 = plt.subplot2grid(gridsize, (3,0),
                                colspan=2,
-                               rowspan=2)
+                               rowspan=4)
         ax2.plot(df[app_config.AS_OF_DATE], df['asset_value'])
         ax2.set_ylabel('Values')
         ax2.set_title('Asset value')
