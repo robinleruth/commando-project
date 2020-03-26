@@ -6,9 +6,9 @@ from app.domain.services.data.data_service import DataService
 from app.domain.model.available_strategy import AvailableStrategy
 
 
-def strategy_service_factory(strat: AvailableStrategy, data_service: DataService) -> StrategyService:
+def strategy_service_factory(strat: AvailableStrategy, data_service: DataService, *args) -> StrategyService:
     if strat is AvailableStrategy.RANDOM_SIGNAL:
         return RandomStrategy()
     elif strat is AvailableStrategy.MOVING_AVERAGE:
-        return MovingAverageStrategyService(data_service)
+        return MovingAverageStrategyService(data_service, *args)
     return None

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from dataclasses import field
 
 from app.domain.model.side import Side
+from app.infrastructure.log import logger
 
 
 @dataclass
@@ -39,6 +40,7 @@ class Position:
             return False
         perf = self._evaluate_perf()
         if perf > self.take_profit:
+            logger.info(f'Closing position due to take profit : {self.serialize}')
             return True
         else:
             return False
@@ -48,6 +50,7 @@ class Position:
             return False
         perf = self._evaluate_perf()
         if perf < self.stop_loss:
+            logger.info(f'Closing position due to stop loss : {self.serialize}')
             return True
         else:
             return False

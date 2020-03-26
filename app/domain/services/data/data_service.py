@@ -23,7 +23,7 @@ class DataService:
         if self._df is None:
             logger.info('DataService get data...')
             self._df = self.connector.get_df()
-            logger.info('DataService filtering between {self.start_date} and {self.end_date}')
+            logger.info(f'DataService filtering between {self.start_date} and {self.end_date}')
             self._df = self._df.set_index(app_config.AS_OF_DATE).loc[self.start_date:self.end_date].reset_index()
             if self._df.empty:
                 raise NoDataFoundException(f'DataFrame is empty for dates {self.start_date} - {self.end_date}')

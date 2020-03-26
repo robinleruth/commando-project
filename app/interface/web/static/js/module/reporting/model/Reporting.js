@@ -19,10 +19,10 @@
          return {
              start_date: "2000-01-03",
              end_date: "2019-04-12",
-             stock: "AAPL",
+             stock: "SP500",
              strategy: "RANDOM_SIGNAL",
              ptf_type: "SHORT_ALLOWED",
-             params: [],
+             params: [42, 252],
              transaction_fee: 0,
              initial_capital: 1000,
              take_profit: 0,
@@ -38,8 +38,10 @@
      compute: function(){
         app.AlertView.show('Reporting', 'Launching...');
         // this.toFormat();
+        // this.set('params', JSON.stringify(this.get('params')));
         var j = this.toJSON();
-        // this.toVisual();
+        console.log(j);
+        // this.set('params', JSON.parse(this.get('params')));
         (function(model){
             $.ajax({
                 url: config.api_url + 'backtester_controller',

@@ -15,6 +15,7 @@ from app.domain.services.data.no_data_found_exception import NoDataFoundExceptio
 from app.domain.services.main_service import MainService
 from app.infrastructure.config import app_config
 from app.infrastructure.data.data_connector_factory import data_connector_factory
+from app.infrastructure.log import logger
 
 
 router = APIRouter()
@@ -31,10 +32,11 @@ async def backtest_strategy(params: StrategySchemaIn):
     stop_loss = params.stop_loss if params.stop_loss != 0 else None
     strategy = params.strategy
     ptf_type = params.ptf_type
+    strat_params = params.params
     try:
         data_connector = data_connector_factory(stock)
         data_service = DataService(data_connector, start_date, end_date)
-        strategy_service = strategy_service_factory(strategy, data_service)
+        strategy_service = strategy_service_factory(strategy, data_service, *strat_params)
         portfolio_service = PortfolioService(transaction_fee,
                                             strategy_service,
                                             asset_values=data_service.df,
@@ -51,8 +53,10 @@ async def backtest_strategy(params: StrategySchemaIn):
         ret = service.serialize
         ret['base_100_file_name'] = file_name
     except NoDataFoundException as e:
+        logger.error('NoDataFoundException :  ' + str(e))
         raise HTTPException(400, str(e))
     except Exception as e:
+        logger.error('Exception : ' + str(e))
         raise HTTPException(400, str(e))
     print(ret)
     return ret
