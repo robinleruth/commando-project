@@ -8,6 +8,7 @@
     className: '',
     events: {
         'click .launch': 'compute',
+        'click .download': 'download',
         'blur input': 'saveChange',
         'blur select': 'saveChange',
     },
@@ -75,6 +76,9 @@
              })(this);
          }
      },
-     selectMapping: {}
+     selectMapping: {},
+     download: function(){
+         this.model.download();
+     }
  });
  

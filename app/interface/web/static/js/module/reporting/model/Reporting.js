@@ -65,5 +65,36 @@
             });
         })(this);
     },
+     download: function(){
+         var data = this.get('positions');
+         var headers = Object.keys(data[0]);
+         data.forEach(r => {
+             r.positions = JSON.stringify(r.positions);
+         });
+         var f = function(arr){
+             var to_ret = [];
+             headers.forEach(elem => {
+                 to_ret.push(arr[elem]);
+             });
+             return to_ret;
+         }
+         data = data.map(x => f(x));
+         data.unshift(headers);
+         var n = function(arr){
+             var a = '';
+             arr.forEach(elem => {
+                 a = a + ',' + String(elem);
+             });
+             return a;
+         }
+         data = data.map(x => n(x));
+         data = data.join('\n');
+         var blob = new Blob([data], {type: 'text/csv'});
+         var href = window.URL.createObjectURL(blob);
+         var link = document.createElement('a');
+         link.setAttribute('href', href);
+         link.setAttribute('download', 'Positions.csv');
+         link.click();
+     }
  });
  
