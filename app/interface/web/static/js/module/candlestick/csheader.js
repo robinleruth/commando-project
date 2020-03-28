@@ -4,7 +4,7 @@ function cshrender(selection) {
   selection.each(function(data) {
   
     var interval   = TIntervals[TPeriod];
-    var format     = (interval=="month")?d3.timeFormat("%b %Y"):d3.timeFormat("%b %d %Y");
+    var format     = (interval=="month")?d3.time.format("%b %Y"):d3.time.format("%b %d %Y");
     var dateprefix = (interval=="month")?"Month of ":(interval=="week")?"Week of ":"";
     d3.select("#infodate").text(dateprefix + format(data.TIMESTAMP));
     d3.select("#infoopen").text("O " + data.OPEN);
@@ -17,4 +17,3 @@ function cshrender(selection) {
 
 return cshrender;
 } // csheader
-

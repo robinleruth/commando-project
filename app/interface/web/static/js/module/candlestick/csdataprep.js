@@ -10,9 +10,9 @@ function genType(d) {
 }
 
 function timeCompare(date, interval) {
-  if (interval == "week")       { var durfn = d3.timeMonday(date); }
-  else if (interval == "month") { var durfn = d3.timeMonth(date); }
-  else { var durfn = d3.timeDay(date); } 
+  if (interval == "week")       { var durfn = d3.time.monday(date); }
+  else if (interval == "month") { var durfn = d3.time.month(date); }
+  else { var durfn = d3.time.day(date); } 
   return durfn;
 }
 
@@ -32,4 +32,3 @@ function dataCompress(data, interval) {
 
   return compressedData;
 }
-

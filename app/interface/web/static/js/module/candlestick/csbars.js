@@ -8,16 +8,18 @@ function barchart() {
   function barrender(selection) {
     selection.each(function(data) {
   
-      var x = d3.scaleBand()
-          .rangeRound([0, width]);
+      var x = d3.scale.ordinal()
+          .rangeBands([0, width]);
       
-      var y = d3.scaleLinear()
+      var y = d3.scale.linear()
           .rangeRound([height, 0]);
       
-      var xAxis = d3.axisBottom(x)
-          .tickFormat(d3.timeFormat(TFormat[TIntervals[TPeriod]]));
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .tickFormat(d3.time.format(TFormat[TIntervals[TPeriod]]));
       
-      var yAxis = d3.axisLeft(y)
+      var yAxis = d3.svg.axis()
+          .scale(y)
           .ticks(Math.floor(height/50));
       
       var svg = d3.select(this).select("svg")
@@ -33,14 +35,14 @@ function barchart() {
       svg.append("g")
           .attr("class", "axis yaxis")
           .attr("transform", "translate(" + width + ",0)")
-          .call(yAxis.tickFormat("").tickSize(0));
+          .call(yAxis.orient("right").tickFormat("").tickSize(0));
   
 //      svg.append("g")
 //          .attr("class", "axis yaxis")
 //          .attr("transform", "translate(0,0)")
 //          .call(yAxis.orient("left"));
   
-      var barwidth    = x.range();
+      var barwidth    = x.rangeBand();
       var fillwidth   = (Math.floor(barwidth*0.9)/2)*2+1;
       var bardelta    = Math.round((barwidth-fillwidth)/2);
   
@@ -80,4 +82,3 @@ function barchart() {
 
 return barrender;
 } // barchart
-
