@@ -20,6 +20,12 @@ class Portfolio(metaclass=ABCMeta):
     positions: List[Position] = field(default_factory=list)
     liquidative_value: float = 0
     asset_perf: float = 0
+    open_value: float = None
+    high_value: float = None
+    low_value: float = None
+    close_value: float = None
+    turnover: float = None
+    volatility: float = None
 
     def compute_liquid_value(self):
         self.liquidative_value = self.money
@@ -50,5 +56,11 @@ class Portfolio(metaclass=ABCMeta):
             'asset_value': float(self.asset_value),
             'positions': [i.serialize for i in self.positions],
             'liquidative_value': float(self.liquidative_value),
-            'asset_perf': float(self.asset_perf)
+            'asset_perf': float(self.asset_perf),
+            'open': self.open_value,
+            'high': self.high_value,
+            'low': self.low_value,
+            'close': self.close_value,
+            'turnover': self.turnover,
+            'volatility': self.volatility
         }
