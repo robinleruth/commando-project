@@ -4,17 +4,20 @@ import unittest
 from app.domain.services.main_service import MainService
 from app.domain.services.reporting.var.var_service_factory import var_service_factory
 from app.domain.services.data.data_service import DataService
+from app.domain.services.data.available_stocks import AvailableStocks
 from app.domain.services.portfolio.portfolio_service import PortfolioService
 from app.domain.services.strategy.strategy_service_factory import strategy_service_factory
 from app.domain.services.strategy.random_strategy import RandomStrategy
 from app.domain.model.portfolio.portfolio_type import PortfolioType
+from app.infrastructure.data.data_connector_factory import data_connector_factory
 
 
 class TestMainService(unittest.TestCase):
     def setUp(self):
         transaction_fee = 5
         initial_capital = 10000
-        data_service = DataService()
+        data_connector = data_connector_factory(AvailableStocks.MOCK)
+        data_service = DataService(data_connector)
         strategy_service = RandomStrategy()
         portfolio_service = PortfolioService(transaction_fee, strategy_service,
                                              asset_values=data_service.df,

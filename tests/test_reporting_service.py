@@ -15,8 +15,9 @@ class TestReportingService(unittest.TestCase):
                  '2020-03-05', '2020-03-06']
         dates = list(map(lambda x: dt.datetime.strptime(x, "%Y-%m-%d"), dates))
         spot = [100, 105, 102, 110, 90, 95]
-        df = pd.DataFrame(list(zip(dates, spot)),
-                          columns=[app_config.AS_OF_DATE, app_config.SPOT])
+        asset_value = [100, 105, 102, 110, 90, 95]
+        df = pd.DataFrame(list(zip(dates, spot, asset_value)),
+                          columns=[app_config.AS_OF_DATE, app_config.SPOT, 'asset_value'])
         ptf_service = MagicMock()
         ptf_service.ptf_to_df = MagicMock(return_value=df)
         var_service = MagicMock()
