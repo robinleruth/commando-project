@@ -57,10 +57,10 @@ class Portfolio(metaclass=ABCMeta):
             'positions': [i.serialize for i in self.positions],
             'liquidative_value': float(self.liquidative_value),
             'asset_perf': float(self.asset_perf),
-            'open': self.open_value,
-            'high': self.high_value,
-            'low': self.low_value,
-            'close': self.close_value,
-            'turnover': self.turnover,
-            'volatility': self.volatility
+            'open': self.open_value or 0,
+            'high': self.high_value or 0,
+            'low': self.low_value or 0,
+            'close': self.close_value or 0,
+            'turnover': self.turnover or 0,
+            'volatility': self.volatility or 0
         }

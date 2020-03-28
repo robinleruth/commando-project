@@ -12,9 +12,9 @@ class PortfolioSchema(BaseModel):
     positions: List[PositionSchema]
     liquidative_value: float
     asset_perf: float
-    open_value: float
-    high_value: float
-    low_value: float
-    close_value: float
+    open: float
+    high: float
+    low: float
+    close: float
     turnover: float
     volatility: float
