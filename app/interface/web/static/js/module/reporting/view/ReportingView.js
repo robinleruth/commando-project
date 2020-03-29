@@ -28,6 +28,7 @@
         if(this.model.get('positions').length > 0){
             var graphView = new app.GraphView({array: this.model.get('positions')});
             this.$('.b100_image').append(graphView.render().el);
+            mainjs();
         }
         // this.$('.b100_image').append(img_dom);
         this.populateSelects();
