@@ -1,6 +1,7 @@
 <script type="text/template" id="reporting_template">
     <div class="d-flex justify-content-around">
         <div class="d-flex flex-column justify-content-around">
+            <h4>Graph</h2>
             <div class="b100_image">
             </div>
             <div>
@@ -48,6 +49,9 @@
 
 <script src="{{ url_for('static', filename='js/module/position/model/Position.js')}}"></script>
 <script src="{{ url_for('static', filename='js/module/position/model/ColPosition.js')}}"></script>
+
+{% include 'graph_view_template.html' %}
+<script src="{{ url_for('static', filename='js/module/graph/GraphView.js')}}"></script>
 
 
 <script src="{{ url_for('static', filename='js/module/reporting/model/Reporting.js')}}"></script>

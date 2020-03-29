@@ -24,7 +24,12 @@
         var file_path = "/static/graph/";
         file_path = file_path + this.model.get('base_100_file_name');
         var img_dom = "<img src='" + file_path + "' alt='Image' height='400' width='600'>";
-        this.$('.b100_image').append(img_dom);
+        this.$('.b100_image').children().remove();
+        if(this.model.get('positions').length > 0){
+            var graphView = new app.GraphView({array: this.model.get('positions')});
+            this.$('.b100_image').append(graphView.render().el);
+        }
+        // this.$('.b100_image').append(img_dom);
         this.populateSelects();
         return this;
     },
@@ -80,6 +85,6 @@
      selectMapping: {},
      download: function(){
          this.model.download();
-     }
+     },
  });
  

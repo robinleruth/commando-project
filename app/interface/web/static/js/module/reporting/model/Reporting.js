@@ -18,8 +18,8 @@
      defaults: function(){
          return {
              start_date: "2000-01-03",
-             end_date: "2019-04-12",
-             stock: "SP500",
+             end_date: "2021-04-12",
+             stock: "MOCK",
              strategy: "RANDOM_SIGNAL",
              ptf_type: "SHORT_ALLOWED",
              params: [42, 252],

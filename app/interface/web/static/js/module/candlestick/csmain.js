@@ -5,12 +5,12 @@ var TIntervals   = {"1M":"day", "3M":"day", "6M":"day", "1Y":"week", "2Y":"week"
 var TFormat      = {"day":"%d %b '%y", "week":"%d %b '%y", "month":"%b '%y" };
 var genRaw, genData;
     
-(function() {
-    d3.csv("/static/stockdata.csv", genType, function(data) {
-      genRaw         = data;
-      mainjs();
-    }); 
-}());
+// (function() {
+//     d3.csv("/static/stockdata.csv", genType, function(data) {
+//       genRaw         = data;
+//       mainjs();
+//     }); 
+// }());
 
 function toSlice(data) { return data.slice(-TDays[TPeriod]); }
 
