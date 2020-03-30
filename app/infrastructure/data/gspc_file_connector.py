@@ -12,4 +12,5 @@ class GspcFileConnector(DataConnector):
         df[app_config.AS_OF_DATE] = pd.to_datetime(df[app_config.AS_OF_DATE])
         df[app_config.VOLATILITY] = (df[app_config.HIGH] - df[app_config.LOW]) / df[app_config.LOW]
         df[app_config.TURNOVER] = 0
+        df[app_config.SPOT] = df[app_config.CLOSE]
         return df
