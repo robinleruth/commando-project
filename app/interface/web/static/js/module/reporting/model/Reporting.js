@@ -19,8 +19,8 @@
          return {
              start_date: "2000-01-03",
              end_date: "2021-04-12",
-             stock: "MOCK",
-             strategy: "RANDOM_SIGNAL",
+             stock: "SP500",
+             strategy: "MOVING_AVERAGE",
              ptf_type: "SHORT_ALLOWED",
              params: [42, 252],
              transaction_fee: 0,

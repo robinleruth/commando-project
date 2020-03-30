@@ -13,7 +13,17 @@ class TestPortfolioService(unittest.TestCase):
         dates = ['2020-03-01', '2020-03-02', '2020-03-03']
         dates = list(map(lambda x: dt.datetime.strptime(x, "%Y-%m-%d"), dates))
         spot = [100, 105, 90]
-        df = pd.DataFrame(list(zip(dates, spot)), columns=[app_config.AS_OF_DATE, app_config.SPOT])
+        open = [100, 105, 90]
+        high = [100, 105, 90]
+        low = [100, 105, 90]
+        close = [100, 105, 90]
+        vol = [100, 105, 90]
+        df = pd.DataFrame(list(zip(dates, spot, open, high, low, close, vol)),
+                          columns=[app_config.AS_OF_DATE, app_config.SPOT,
+                                   app_config.OPEN, app_config.HIGH,
+                                   app_config.LOW, app_config.CLOSE,
+                                   app_config.VOLATILITY])
+        df[app_config.TURNOVER] = 0
         strat_service = MockStrategyService()
         self.ptf_service = PortfolioService(asset_values=df,
                                             initial_capital=1000,

@@ -43,13 +43,26 @@ class PortfolioService:
                     ptf = PortfolioShortAllowed(
                         as_of_date=asset_values.at[i, app_config.AS_OF_DATE],
                         money=initial_capital,
-                        asset_value=asset_values.at[i, app_config.SPOT]
+                        asset_value=asset_values.at[i, app_config.SPOT],
+                        open_value=asset_values.at[i, app_config.OPEN],
+                        high_value=asset_values.at[i, app_config.HIGH],
+                        low_value=asset_values.at[i, app_config.LOW],
+                        close_value=asset_values.at[i, app_config.CLOSE],
+                        turnover=asset_values.at[i, app_config.TURNOVER],
+                        volatility=asset_values.at[i, app_config.VOLATILITY]
                     )
                 else:
                     ptf = portfolio_factory(self.portfolio[-1],
                                             asset_values.at[i, app_config.SPOT],
                                             asset_values.at[i, app_config.AS_OF_DATE],
-                                            ptf_type)
+                                            ptf_type,
+                                            open_value=asset_values.at[i, app_config.OPEN],
+                                            high_value=asset_values.at[i, app_config.HIGH],
+                                            low_value=asset_values.at[i, app_config.LOW],
+                                            close_value=asset_values.at[i, app_config.CLOSE],
+                                            turnover=asset_values.at[i, app_config.TURNOVER],
+                                            volatility=asset_values.at[i, app_config.VOLATILITY]
+                                            )
                 self.portfolio.append(ptf)
 
     def evaluate(self, ptf: Portfolio,

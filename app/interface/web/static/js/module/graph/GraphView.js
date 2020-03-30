@@ -5,7 +5,7 @@ var app = app || {};
 app.GraphView = Backbone.View.extend({
    template: _.template($('#graph_view_template').html()),
    tagName: 'div',
-   className: '',
+   className: 'candle_graph',
    events: {
    },
    initialize: function(options){

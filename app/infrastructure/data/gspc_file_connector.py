@@ -10,4 +10,6 @@ class GspcFileConnector(DataConnector):
         file_path = os.path.abspath(os.path.dirname(__file__))
         df = pd.read_csv(os.path.join(file_path, 'sp500.csv'))
         df[app_config.AS_OF_DATE] = pd.to_datetime(df[app_config.AS_OF_DATE])
+        df[app_config.VOLATILITY] = (df[app_config.HIGH] - df[app_config.LOW]) / df[app_config.LOW]
+        df[app_config.TURNOVER] = 0
         return df

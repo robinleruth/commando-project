@@ -21,11 +21,13 @@ class Config:
     GRAPH_FOLDER = os.path.join(BASEDIR, 'interface', 'web', 'static', 'graph')
     JS_LIB_FOLDER = os.path.join(STATIC_FOLDER, 'js', 'lib')
     AS_OF_DATE = 'as_of_date'
-    SPOT = 'Close'
+    SPOT = 'Spot'
     OPEN = 'Open'
     CLOSE = 'Close'
     HIGH = 'High'
     LOW = 'Low'
+    TURNOVER = 'Turnover'
+    VOLATILITY = 'Volatility'
 
 
 class TestConfig(Config):

@@ -21,12 +21,12 @@ class Portfolio(metaclass=ABCMeta):
     positions: List[Position] = field(default_factory=list)
     liquidative_value: float = 0
     asset_perf: float = 0
-    open_value: float = None
-    high_value: float = None
-    low_value: float = None
-    close_value: float = None
-    turnover: float = None
-    volatility: float = None
+    open_value: float = 0
+    high_value: float = 0
+    low_value: float = 0
+    close_value: float = 0
+    turnover: float = 0
+    volatility: float = 0
 
     def compute_liquid_value(self):
         self.liquidative_value = self.money
@@ -58,16 +58,10 @@ class Portfolio(metaclass=ABCMeta):
             'positions': [i.serialize for i in self.positions],
             'liquidative_value': float(self.liquidative_value),
             'asset_perf': float(self.asset_perf),
-            'open': random.randint(80,120),
-            'high': random.randint(80,120),
-            'low': random.randint(80,120),
-            'close': random.randint(80,120),
-            'turnover': random.randint(80,120),
-            'volatility': random.randint(80,120)
-            # 'open': self.open_value or 0,
-            # 'high': self.high_value or 0,
-            # 'low': self.low_value or 0,
-            # 'close': self.close_value or 0,
-            # 'turnover': self.turnover or 0,
-            # 'volatility': self.volatility or 0
+            'open': round(float(self.open_value), 2),
+            'high': round(float(self.high_value), 2),
+            'low': round(float(self.low_value), 2),
+            'close': round(float(self.close_value), 2),
+            'turnover': round(float(self.turnover), 2),
+            'volatility': round(float(self.volatility), 2)
         }
