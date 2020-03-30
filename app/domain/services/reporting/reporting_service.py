@@ -80,26 +80,30 @@ class ReportingService:
             df: pd.DataFrame = self.ptf_service.ptf_to_df()
             df['perf'] = df[app_config.SPOT].pct_change()
             df['base_100'] = 100*np.nan_to_num(1 + df['perf'].cumsum(), nan=1)
+            df['perf_asset_value'] = df['asset_value'].pct_change()
+            df['asset_value_base_100'] = 100*np.nan_to_num(1 + df['perf_asset_value'].cumsum(), nan=1)
             self.base_100 = df
         return self.base_100
 
     def generate_graph(self) -> Figure:
         if self.base_100 is None:
             self.compute_base_100()
-        gridsize = (7, 2)
+        gridsize = (9, 2)
         fig = plt.figure(figsize=(12, 8))
         ax1 = plt.subplot2grid(gridsize, (0,0),
                                colspan=2,
-                               rowspan=2)
-        ax1.plot(self.base_100[app_config.AS_OF_DATE], self.base_100['base_100'])
+                               rowspan=4)
+        ax1.plot(self.base_100[app_config.AS_OF_DATE], self.base_100['base_100'], label='Portfolio value')
+        ax1.plot(self.base_100[app_config.AS_OF_DATE], self.base_100['asset_value_base_100'], label='Asset value')
         ax1.set_ylabel('Values')
-        ax1.set_title('PTF value Base 100')
+        ax1.set_title('Base 100')
         ax1.set_xlabel('Dates')
+        ax1.legend()
         nb_items = ceil(len(self.base_100[app_config.AS_OF_DATE].tolist()) / 6)
         ax1.set_xticks(self.base_100[app_config.AS_OF_DATE].tolist()[::nb_items])
 
         df: pd.DataFrame = self.ptf_service.ptf_to_df()
-        ax2 = plt.subplot2grid(gridsize, (3,0),
+        ax2 = plt.subplot2grid(gridsize, (5,0),
                                colspan=2,
                                rowspan=4)
         ax2.plot(df[app_config.AS_OF_DATE], df['asset_value'])

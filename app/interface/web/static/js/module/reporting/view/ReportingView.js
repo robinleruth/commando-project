@@ -11,11 +11,13 @@
         'click .download': 'download',
         'blur input': 'saveChange',
         'blur select': 'saveChange',
+        'click .switch_graph': 'switchGraph',
     },
     initialize: function(){
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'destroy', this.remove);
         this.listenTo(this.model, 're-render', this.render);
+        this.candle = true;
 
         this.render();
     },
@@ -23,7 +25,13 @@
         this.$el.html(this.template(this.model.toJSON()));
         var file_path = "/static/graph/";
         file_path = file_path + this.model.get('base_100_file_name');
-        var img_dom = "<img src='" + file_path + "' alt='Image' height='400' width='600'>";
+        var img_dom = "<div class='matplotlib_graph' style='display: none;'><img src='" + file_path + "' alt='Image' height='400' width='600'></div>";
+        this.$('.b100_image').children().remove();
+        if(this.model.get('positions').length > 0){
+            var graphView = new app.GraphView({array: this.model.get('positions')});
+            this.$('.b100_image').append(graphView.render().el);
+            mainjs();
+        }
         this.$('.b100_image').append(img_dom);
         this.populateSelects();
         return this;
@@ -80,6 +88,16 @@
      selectMapping: {},
      download: function(){
          this.model.download();
+     },
+     switchGraph: function(){
+         this.candle = !this.candle;
+         if(this.candle) {
+             this.$('.matplotlib_graph').css('display', 'none');
+             this.$('.candle_graph').css('display', 'block');
+         } else {
+             this.$('.matplotlib_graph').css('display', 'block');
+             this.$('.candle_graph').css('display', 'none');
+         }
      }
  });
  

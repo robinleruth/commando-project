@@ -18,6 +18,7 @@ class MovingAverageStrategyService(StrategyService):
     long_term_trend: int
     signal_threshold: float = 50
     df: pd.DataFrame = None
+    current_pos: Side = Side.OTHER
 
     def __post_init__(self):
         self.compute()
@@ -37,9 +38,11 @@ class MovingAverageStrategyService(StrategyService):
         logger.info('MovingAverageStrategyService computation done...')
 
     def evaluate(self, date: dt.datetime) -> Side:
-        if self.df.loc[date]['Regime'] == 1:
+        if self.df.loc[date]['Regime'] == 1 and self.current_pos != Side.BUY:
+            self.current_pos = Side.BUY
             return Side.BUY
-        elif self.df.loc[date]['Regime'] == -1:
+        elif self.df.loc[date]['Regime'] == -1 and self.current_pos != Side.SELL:
+            self.current_pos = Side.SELL
             return Side.SELL
         else:
             return Side.OTHER

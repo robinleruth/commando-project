@@ -1,11 +1,11 @@
 function genType(d) {
-  d.TIMESTAMP  = parseDate(d.TIMESTAMP);
-  d.LOW        = +d.LOW;
-  d.HIGH       = +d.HIGH; 
-  d.OPEN       = +d.OPEN;
-  d.CLOSE      = +d.CLOSE;
-  d.TURNOVER   = +d.TURNOVER;
-  d.VOLATILITY = +d.VOLATILITY;
+  d.TIMESTAMP  = parseDate(d.as_of_date);
+  d.LOW        = +d.low;
+  d.HIGH       = +d.high; 
+  d.OPEN       = +d.open;
+  d.CLOSE      = +d.close;
+  d.TURNOVER   = +d.turnover;
+  d.VOLATILITY = +d.volatility;
   return d;
 }
 

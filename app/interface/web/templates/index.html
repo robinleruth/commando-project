@@ -17,9 +17,8 @@
         <hr/>
          <!-- Tab links -->
         <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'backtest_strategy')">Backtest Strategy</button>
+            <button class="tablinks active" onclick="openTab(event, 'backtest_strategy')">Backtest Strategy</button>
             <button class="tablinks" onclick="openTab(event, 'Logs')">Logs</button>
-            <button class="tablinks" onclick="openTab(event, 'candle')">candle</button>
         </div>
 
         <!-- Tab content -->
@@ -33,10 +32,6 @@
             {% include 'stream_log.html' %}
         </div>
 
-        <div id="candle" class="tabcontent">
-            <h3>Candle</h3>
-            {% include '_test_d3.html' %}
-        </div>
       </div>
 
     <!-- Optional JavaScript -->

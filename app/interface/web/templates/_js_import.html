@@ -1,11 +1,14 @@
 <script type="text/template" id="reporting_template">
     <div class="d-flex justify-content-around">
-        <div class="d-flex flex-column justify-content-around">
+        <div class="d-flex flex-column">
+            <h4>Graph</h2>
             <div class="b100_image">
             </div>
+            <!--
             <div>
                 grid
             </div>
+            -->
         </div>
         <div class="d-flex flex-column">
             <div class="d-flex flex-column p-2 m-2">
@@ -24,6 +27,7 @@
             </div>
             <button class="launch">Go!</button>
             <button class="download">Download positions!</button>
+            <button class="switch_graph">Switch graph view</button>
             <div class="d-flex flex-column p-2 m-2">
                 <h2 style="text-align: center;">output</h2>
                 <hr/>
@@ -48,6 +52,9 @@
 
 <script src="{{ url_for('static', filename='js/module/position/model/Position.js')}}"></script>
 <script src="{{ url_for('static', filename='js/module/position/model/ColPosition.js')}}"></script>
+
+{% include 'graph_view_template.html' %}
+<script src="{{ url_for('static', filename='js/module/graph/GraphView.js')}}"></script>
 
 
 <script src="{{ url_for('static', filename='js/module/reporting/model/Reporting.js')}}"></script>
