@@ -39,6 +39,8 @@ app.Reporting = Backbone.Model.extend({
        app.AlertView.show('Reporting', 'Launching...');
        // this.toFormat();
        // this.set('params', JSON.stringify(this.get('params')));
+       if(typeof this.get('params') === 'string')
+            this.set('params', JSON.parse('[' + this.get('params') + ']'));
        var j = this.toJSON();
        console.log(j);
        // this.set('params', JSON.parse(this.get('params')));
